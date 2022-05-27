@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        AnchorPane mainPane = FXMLLoader.load(getClass().getResource("/mainPane.fxml"));
+        AnchorPane mainPane = FXMLLoader.load(getClass().getResource("/fxml/mainPane.fxml"));
         Scene scene = new Scene(mainPane);
         stage.setScene(scene);
         stage.setTitle("Kółko i krzyżk!");
