@@ -57,8 +57,10 @@ public class MainController {
 
     private ArrayList<Button> buttons;
     private int playerMove = 0;
+    private String allSign = "";
 
     public void initialize() {
+
         buttons = new ArrayList(Arrays.asList
                 (button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
@@ -71,6 +73,7 @@ public class MainController {
     private void resetartGame() {
         buttons.forEach(this::resetButtons);
         winText.setText("");
+        allSign = "";
     }
 
     private void resetButtons(Button button) {
@@ -83,7 +86,9 @@ public class MainController {
             setSign(button);
             button.setDisable(true);
             checkIfGameIsOver();
+            allSign += button.getText();
         });
+
     }
 
     private void checkIfGameIsOver() {
@@ -91,6 +96,7 @@ public class MainController {
     }
 
     private void checkWinPattern() {
+        boolean isEndGame = false;
         for (int i = 0; i < 8; i++) {
             String winPattern = switch (i) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -110,6 +116,10 @@ public class MainController {
             } else if (winPattern.equals("OOO")){
                 winText.setText("player O win!");
                 break;
+            }
+
+            if (allSign.length() == 8) {
+                winText.setText("Draw!");
             }
         }
     }

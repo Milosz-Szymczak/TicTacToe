@@ -79,7 +79,7 @@
          </menus>
       </MenuBar>
       <Button fx:id="restartButton" layoutX="327.0" layoutY="553.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="139.0" text="Restart" />
-      <Text fx:id="winText" layoutX="314.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="166.0">
+      <Text fx:id="winText" layoutX="276.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="243.0">
          <font>
             <Font size="40.0" />
          </font>
