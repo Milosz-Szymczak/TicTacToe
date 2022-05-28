@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,31 +17,34 @@ public class MainController {
     private MenuItem aboutMenuItem;
 
     @FXML
-    private Button button00;
+    private Text winText;
 
     @FXML
-    private Button button01;
+    private Button button1;
 
     @FXML
-    private Button button02;
+    private Button button2;
 
     @FXML
-    private Button button10;
+    private Button button3;
 
     @FXML
-    private Button button11;
+    private Button button4;
 
     @FXML
-    private Button button12;
+    private Button button5;
 
     @FXML
-    private Button button20;
+    private Button button6;
 
     @FXML
-    private Button button21;
+    private Button button7;
 
     @FXML
-    private Button button22;
+    private Button button8;
+
+    @FXML
+    private Button button9;
 
     @FXML
     private MenuItem closeMenuItem;
@@ -55,10 +60,22 @@ public class MainController {
 
     public void initialize() {
         buttons = new ArrayList(Arrays.asList
-                (button00, button01, button02, button10, button11, button12, button20, button21, button22));
+                (button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
         buttons.forEach(this::setupButton);
 
+        restartButton.addEventFilter(ActionEvent.ACTION, actionEvent -> resetartGame());
+
+    }
+
+    private void resetartGame() {
+        buttons.forEach(this::resetButtons);
+        winText.setText("");
+    }
+
+    private void resetButtons(Button button) {
+        button.setDisable(false);
+        button.setText("");
     }
 
     private void setupButton(Button button) {
@@ -70,7 +87,31 @@ public class MainController {
     }
 
     private void checkIfGameIsOver() {
+        checkWinPattern();
+    }
 
+    private void checkWinPattern() {
+        for (int i = 0; i < 8; i++) {
+            String winPattern = switch (i) {
+                case 0 -> button1.getText() + button2.getText() + button3.getText();
+                case 1 -> button4.getText() + button5.getText() + button6.getText();
+                case 2 -> button7.getText() + button8.getText() + button9.getText();
+                case 3 -> button1.getText() + button4.getText() + button7.getText();
+                case 4 -> button2.getText() + button5.getText() + button8.getText();
+                case 5 -> button3.getText() + button6.getText() + button8.getText();
+                case 6 -> button3.getText() + button5.getText() + button7.getText();
+                case 7 -> button1.getText() + button5.getText() + button9.getText();
+                default -> null;
+            };
+
+            if (winPattern.equals("XXX")) {
+                winText.setText("player X win!");
+                break;
+            } else if (winPattern.equals("OOO")){
+                winText.setText("player O win!");
+                break;
+            }
+        }
     }
 
     private void setSign(Button button) {
